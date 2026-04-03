@@ -21,7 +21,7 @@ import pandas as pd
 HERE = os.path.dirname(__file__) # current directory
 SF_PATH = os.path.join(HERE, "stockfish-18.exe") # the big fish
 OUTPUT_DIR = os.path.join(HERE, "output") # output directory
-DEPTH = 15 # Stockfish engine depth
+DEPTH = 15 # Stockfish engine depth, we say this is good enough (although depth=20 would give more accurate synthetic data)
 GAMES_PER_LEVEL = 50 # number of games of self-play (per level)
 
 # This function plays a single chess game between SF18 Base and its opponent.
@@ -105,6 +105,7 @@ def main():
 
     # Store (game, lvl, base_is_white) tuples so we can filter by player when writing LLM finetuning data
     all_games = []
+    # tally ho
     tally = {} # used to keep score in matches
     game_num = 0
 
