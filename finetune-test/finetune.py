@@ -1,11 +1,11 @@
 import torch
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 from datasets import load_dataset
 from transformers import LlamaForCausalLM, AutoTokenizer, DataCollatorForLanguageModeling, Trainer, TrainingArguments
 
 # a brittle path
-load_dotenv('../.env')
+# load_dotenv('../.env')
 
 model_name = "openlm-research/open_llama_3b"
 tokenizer = AutoTokenizer.from_pretrained(model_name, use_fast=False)
@@ -32,7 +32,7 @@ model = LlamaForCausalLM.from_pretrained(
 )
 
 training_args = TrainingArguments(  # type: ignore[call-arg]
-    output_dir="open-llama-3b-finetuned",
+    output_dir="/scratch/ejtang/PatzerLM",
     num_train_epochs=10,
     per_device_train_batch_size=2,
     gradient_accumulation_steps=4,
@@ -47,7 +47,8 @@ training_args = TrainingArguments(  # type: ignore[call-arg]
     load_best_model_at_end=True,
     remove_unused_columns=False,
     report_to="none", # disable wandb logging
-    include_num_input_tokens_seen=True # print number of tokens used
+    include_num_input_tokens_seen=True, # print number of tokens used
+    save_total_limit=2 # save only the last 2 checkpoints
 )
 
 trainer = Trainer(
@@ -60,10 +61,10 @@ trainer = Trainer(
 )
 
 trainer.train()
-trainer.save_model("open-llama-3b-finetuned/final")
-tokenizer.save_pretrained("open-llama-3b-finetuned/final")
+trainer.save_model("/scratch/ejtang/PatzerLM/final")
+tokenizer.save_pretrained("/scratch/ejtang/PatzerLM/final")
 
-path = "open-llama-3b-finetuned/final"
+path = "/scratch/ejtang/PatzerLM/final"
 tokenizer = AutoTokenizer.from_pretrained(path)
 model = LlamaForCausalLM.from_pretrained(path, torch_dtype=torch.float16, device_map="auto")
 
