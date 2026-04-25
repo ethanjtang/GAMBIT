@@ -237,7 +237,7 @@ Returns the full prompt as a string.
 def build_prompt(fen: str) -> str:
     # return regular prompt
     return (
-        "You are a chess engine. Given the following board position in FEN notation, "
+        "User: You are a chess engine. Given the following board position in FEN notation, "
         "provide the single best move in UCI format.\n"
         f"FEN: {fen}\n"
         "Best move:"
@@ -258,7 +258,7 @@ def build_prompt_cheating(fen: str, mate_in: int) -> str:
 
     # return cheating prompt
     return (
-        "Given the following board position in FEN notation, "
+        "User: Given the following board position in FEN notation, "
         "provide the single best move in UCI format.\n"
         f"{side} to mate in {mate_in}. "
         f"FEN: {fen}\n"
