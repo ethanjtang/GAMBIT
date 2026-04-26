@@ -4,7 +4,8 @@ versions of the Stockfish 18 engine (using the option Skill Level at https://off
 
 SF18 Base plays 50 games (25 W / 25 B) vs SF18 Skill Level 0-20.
 I did not use an opening book (since the original paper ChessLLM didn't use an opening book), but
-someone should definitely explore it since it gives a wider variety of positions/openings (and likely better generalization for chess-focused LLMs).
+someone should definitely explore it since it gives a wider variety of positions/openings 
+(and likely better generalization for chess-focused LLMs).
 
 Outputs:
  - output/games.pgn - All self-play games in PGN format
@@ -13,15 +14,23 @@ Outputs:
  - output/finetune.txt - Filtered subset of unique FEN + best move pairs for LLM finetuning
 """
 
-# imports (enter bit on existing US political situation here)
+# imports (enter funny/relevant bit on existing US political situation here)
 import os, time, datetime
 import chess, chess.engine, chess.pgn
-import pandas as pd
+import pandas as pd # subham777 is goated btw
 
 HERE = os.path.dirname(__file__) # current directory
-SF_PATH = os.path.join(HERE, "stockfish-18.exe") # the big fish
+SF_PATH = os.path.join(HERE, "stockfish-18.exe") # THE BIG FISH
 OUTPUT_DIR = os.path.join(HERE, "output") # output directory
-DEPTH = 15 # Stockfish engine depth, we say this is good enough (although depth=20 would give more accurate synthetic data)
+
+# Stockfish engine depth, we say this is good enough (although depth=20-25 would give more accurate synthetic data)
+# For mate-in-X positions, depth=15 should cover a vast majority of puzzles
+# except for extreme cases where the correct move is being pruned somehow
+DEPTH = 15 
+# For completness sake:
+# engine depth != game length
+# they are two seperate metrics, engine depth is an indicator of how "deep" the engine searches on any given move
+
 GAMES_PER_LEVEL = 50 # number of games of self-play (per level)
 
 # This function plays a single chess game between SF18 Base and its opponent.
@@ -76,9 +85,11 @@ def play_game(base, opp, base_is_white, opp_skill_level, game_num):
 
 # Yields (fen, uci, san, eval_cp) for ALL moves in the game, both colors.
 # Used to build the positions parquet.
+# The evals are for anyone who wants to add it to FEN + best move pairs for finetuning LLMs
 def collect_all_positions(game, evals):
     board = game.board()
     node = game
+    # Play through each node/half-move in the game and extract delicious tuples
     while node.variations:
         node = node.variations[0]
         fen = board.fen()
@@ -87,9 +98,12 @@ def collect_all_positions(game, evals):
 
 # Yields (fen, uci, san, eval_cp) for moves made by the given color only.
 # Used to build the filtered finetune text file.
+# Filter is necessary to ensure we are not recording FEN + best move pairs made by weak versions of Stockfish
+# who were annihilated by the standard Stockfish 18 instance at depth=20 with no handicap
 def collect_positions_for_color(game, color, evals):
     board = game.board()
     node = game
+    # Play through each node/half-move in the game and extract delicious tuples
     while node.variations:
         node = node.variations[0]
         fen = board.fen()
@@ -115,10 +129,10 @@ def main():
     for lvl in range(21):
 
         # Pre-match instantiation
-        tally[lvl] = {"W": 0, "D": 0, "L": 0}
+        tally[lvl] = {"W": 0, "D": 0, "L": 0} # tally ho
         print(f"\n=== SF Base vs SF Level {lvl} ===")
 
-        # Load engines
+        # Load engines and configure them
         base = chess.engine.SimpleEngine.popen_uci(SF_PATH)
         opp = chess.engine.SimpleEngine.popen_uci(SF_PATH)
         base.configure({"Skill Level": 20})
@@ -208,12 +222,15 @@ def main():
             elif result == "0-1":
                 colors = [chess.BLACK]
             else: # this continue op should never happen
+                print("Unknown result WEE WOO WEE WOOO !!!!!!!!!!!!!!!!!")
                 continue
             
             # Add position to finetune text data if it is unique and was played by a 
             # sensible opponent (aka someone who didn't lose the game and isn't a moron)
             for color in colors:
+                # filter for moves played by reasonable opponents
                 for fen, uci, san, _eval in collect_positions_for_color(g, color, evals):
+                    # check uniqueness
                     if (fen, uci) not in seen_finetune:
                         seen_finetune.add((fen, uci))
                         f.write(f"<|position-start|>\n"

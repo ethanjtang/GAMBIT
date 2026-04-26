@@ -14,7 +14,6 @@ import random
 import os
 from collections import defaultdict
 
-
 '''
 This function does exactly what the head comment says the program does:
 1. Extracts puzzle positions from input CSV.
@@ -116,6 +115,7 @@ def extract_puzzle_positions(csv_file, output_file, validation_dir=None, validat
             board.push(chess.Move.from_uci(moves[0]))
 
             # Write puzzle start tag if it is in the validation set
+            # training data is set of positions + best moves, no puzzle tags needed
             if is_validation:
                 for theme in themes:
                     if theme not in validation_files:
@@ -237,8 +237,8 @@ def check_for_no_train_val_overlap_positions(train_file, validation_dir):
     # Keep only blocks whose FEN does not appear in the validation set
     kept_blocks = [header]
     for block in blocks[1:]:
-        fen_line = next((line for line in block.splitlines() if line.startswith('FEN: ')), None)
-        fen = fen_line[5:] if fen_line else None
+        fen_line = next((line for line in block.splitlines() if line.startswith('FEN: ')), None) # read FEN line
+        fen = fen_line[5:] if fen_line else None # filter 'FEN: ' tag
         # Check that the current FEN is not in the validation set and remove it if it is.
         if fen in val_fens:
             removed += 1
@@ -255,7 +255,7 @@ def check_for_no_train_val_overlap_positions(train_file, validation_dir):
     print(f"Removed {removed} training positions that overlapped with validation set.")
     print(f"Training file now contains {len(kept_blocks) - 1} positions.")
 
-
+# Hee-Ho!
 def main():
     # Get the directory where this script is located
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -271,6 +271,7 @@ def main():
     # If it does, remove the offender (take it out back)
     check_for_no_train_val_overlap_positions(train_file=train_file, validation_dir=validation_dir)
 
+# main (main [main {main |main|}])
 if __name__ == "__main__":
     main()
 
