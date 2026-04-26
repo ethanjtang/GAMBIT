@@ -499,6 +499,19 @@ def evaluate_llm_model(config: dict, puzzles_by_theme: dict, judge_engine: chess
 # ============================
 
 '''
+This helper function formats a mate-in-N eval (from current side to move's perspective) into a readable string.
+mate_n > 0  -> current side mates in N
+mate_n < 0  -> opponent mates in |N|
+mate_n None -> no forced mate
+'''
+def format_mate_eval(mate_n: int | None) -> str:
+    if mate_n is None:
+        return 'no forced mate'
+    if mate_n > 0:
+        return f'Mate in {mate_n} for you'
+    return f'Mate in {-mate_n} for your opponent'
+
+'''
 This helper function evaluates a LLM using the LLM-Modulo loop on puzzle positions.
 Two HARD critics gate each LLM response before accepting it as the predicted move:
   1. Move validity (Critic 1): the move must be legal in the position. If not, the LLM is
@@ -571,7 +584,7 @@ def evaluate_llm_modulo_pass(label: str, model, tokenizer, device: str,
                     board, chess.engine.Limit(depth=SF18_DEPTH, time=SF18_TIMEOUT)
                 ).get("score")
                 og_mate = og_score.relative.mate() if og_score and og_score.relative.is_mate() else None
-                og_eval = format_mate_eval(og_mate) # formatted as "Mate in {mate_n} (for you)"
+                og_eval = format_mate_eval(og_mate) # formatted as "Mate in {mate_n} for you"
 
                 # Precompute list of legal moves in og position
                 legal_moves_str = ', '.join(m.uci() for m in board.legal_moves)
@@ -667,7 +680,7 @@ def evaluate_llm_modulo_pass(label: str, model, tokenizer, device: str,
                         board_after, chess.engine.Limit(depth=SF18_DEPTH, time=SF18_TIMEOUT)
                     ).get("score")
 
-                    # new_score is from the opponent's perspective, convert to general mate score
+                    # new_score is from the opponent's perspective
                     new_mate_opp = new_score.relative.mate() if new_score and new_score.relative.is_mate() else None
                     
                     # Critic #2 pass: Model's move is valid and DOES improve the evaluation of the position
@@ -682,18 +695,9 @@ def evaluate_llm_modulo_pass(label: str, model, tokenizer, device: str,
 
                     # Critic #2 fail: Model's move is valid but DOESN'T improve the evaluation of the position
 
-                    # Flip new_score to current side's perspective for the feedback message.
+                    # Flip new_score to current side's perspective for the feedback message
                     new_mate_us = -new_mate_opp if new_mate_opp is not None else None
-
-                    # Model move lost the forced mate eval
-                    if new_mate_us is None:
-                        new_eval_feedback = 'no forced mate for you'
-                    # Model move gives forced mate for original side to move
-                    elif new_mate_us > 0:
-                        new_eval_feedback = f'Mate in {new_mate_us} for you'
-                    # DISASTER! Model move gives forced mate for opponent
-                    else:
-                        new_eval_feedback = f'Mate in {new_mate_us} for your opponent'
+                    new_eval_feedback = format_mate_eval(new_mate_us)
 
                     # Only append feedback to model reprompt if it provided a different move from the last attempt
                     # Same reasoning as similar gate for Critic #1, adding additional identical feedback messages
