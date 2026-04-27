@@ -7,9 +7,9 @@
 
 Training for KINGPT variants was conducted on a 1x A100 GPU node on the ASU Sol Supercomputer.
 
-Inference for Stockfish 18 and KINGPT variants was conducted on my personal 7+ year old computer with a GTX 1060 6GB.
+Inference for Stockfish 18 and KINGPT variants was conducted on my personal 2019 computer with a Ryzen 7 5800X, 32 GB DDR4 2133 MHz (yuck!) RAM, and GTX 1060 6GB.
 
-Inference for Open LLaMa 3B and ChessGPT-Base/Chat were conducted on a Lambda Labs 1xH100 GPU node.
+Inference for Open LLaMa 3B and ChessGPT model variants were conducted on a Lambda Labs 1xH100 GPU node.
 
 ## Results
 
