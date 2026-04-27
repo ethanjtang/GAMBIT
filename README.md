@@ -7,12 +7,14 @@
 ### Key
 
 Open LLaMa - Open LLaMa 3B V1 - LINK
+
 ChessGPT-Base - ChessGPT Base V1 - LINK
+
 ChessGPT-Chat - ChessGPT Chat V1 - LINK
 
 ### Overall Model Accuracy
 
-Overall accuracy - number of correct responses / total number of positions
+Overall accuracy - number of correct responses / total number of positions.
 
 A puzzle is considered solved correctly if a model generates a correct response to ALL puzzle positions.
 
@@ -27,10 +29,13 @@ Puzzle accuracy - number of correct responses to puzzles / total number of puzzl
 | ChessGPT-Chat | normal | 30/300 (10.0%) | 126/600 (21.0%) |
 | ChessGPT-Chat | cheating | 37/300 (12.3%) | 153/600 (25.5%) |
 
+### Overall Model Accuracy
+
 Sanity measures how frequently a model chooses a legal/valid move in the given position.
+
 Sanity = 1 / (number of invalid parses / total number of positions)
 
-| Model | Prompt Type |  Sanity |
+| Model | Prompt Type | Sanity |
 |:---|:---|---:|
 | Open LLaMa 3B | normal | 33/600 (5.5%) |
 | Open LLaMa 3B | cheating | 120/600 (20.0%) |
