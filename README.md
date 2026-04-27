@@ -2,6 +2,15 @@
 
 > <ins>G</ins>ener<ins>a</ins>lization or <ins>M</ins>emorization? <ins>B</ins>r<ins>i</ins>ttleness <ins>T</ins>esting for Chess-Trained Language Models
 
+### Evaluations
+
+
+Training for KINGPT variants was conducted on a 1x A100 GPU node on the ASU Sol Supercomputer.
+
+Inference for Stockfish 18 and KINGPT variants was conducted on my personal 7+ year old computer with a GTX 1060 6GB.
+
+Inference for Open LLaMa 3B and ChessGPT-Base/Chat were conducted on a Lambda Labs 1xH100 GPU node.
+
 ## Results
 
 ### Key
@@ -14,14 +23,19 @@ ChessGPT-Chat - ChessGPT Chat V1 - LINK
 
 ### Overall Model Accuracy
 
-Overall accuracy - number of correct responses / total number of positions.
+Overall accuracy = number of correct responses / total number of positions.
 
 A puzzle is considered solved correctly if a model generates a correct response to ALL puzzle positions.
 
-Puzzle accuracy - number of correct responses to puzzles / total number of puzzles
+Puzzle accuracy = number of correct responses to puzzles / total number of puzzles
 
 | Model | Inference Type | Puzzle Accuracy | Overall Accuracy |
 |:---|:---|---:|---:|
+| Stockfish 18 | base | /300 | /600 |
+| Stockfish 18 | lvl 0 | /300 | /600 |
+| KINGPT-Woodpecker | n/a | /300 | /600 |
+| KINGPT-Beaver | n/a | /300 | /600 |
+| KINGPT-Chimera | n/a | /300 | /600 |
 | Open LLaMa 3B | normal | 0/300 (0.0%) | 1/600 (0.2%) |
 | Open LLaMa 3B | cheating | 5/300 (1.7%) | 13/600 (2.2%) |
 | Open LLaMa 3B | pass@K=10 | 3/300 (1.0%) | 20/600 (3.3%) |
@@ -29,7 +43,7 @@ Puzzle accuracy - number of correct responses to puzzles / total number of puzzl
 | ChessGPT-Base | normal | 46/300 (15.3%) | 166/600 (27.7%) |
 | ChessGPT-Base | cheating | 48/300 (16.0%) | 182/600 (30.3%) |
 | ChessGPT-Base | pass@K=10 | 115/300 (38.3%) | 353/600 (58.8%) |
-| ChessGPT-Base | Modulo | /300 (%) | 182/600 (%) |
+| ChessGPT-Base | Modulo | 54/300 (18.0%) | 202/600 (33.7%) |
 | ChessGPT-Chat | normal | 30/300 (10.0%) | 126/600 (21.0%) |
 | ChessGPT-Chat | cheating | 37/300 (12.3%) | 153/600 (25.5%) |
 | ChessGPT-Chat | pass@K=10 | 61/300 (20.3%) | 227/600 (37.8%) |
@@ -37,12 +51,16 @@ Puzzle accuracy - number of correct responses to puzzles / total number of puzzl
 
 ### Overall Model Accuracy
 
-Sanity measures how frequently a model chooses a legal/valid move in the given position.
+Sanity measures how frequently a model chooses a legal/valid move in a given position.
 
 Sanity = 1 / (number of invalid parses / total number of positions)
 
 | Model | Inference Type | Sanity |
 |:---|:---|---:|
+| Stockfish 18 | all | n/a (100%) |
+| KINGPT-Woodpecker | n/a | /600 (%) |
+| KINGPT-Beaver | n/a | /600 (%) |
+| KINGPT-Chimera | n/a | /600 (%) |
 | Open LLaMa 3B | normal | 33/600 (5.5%) |
 | Open LLaMa 3B | cheating | 120/600 (20.0%) |
 | Open LLaMa 3B | pass@K=10 | 309/600 (51.5%) |
@@ -50,7 +68,7 @@ Sanity = 1 / (number of invalid parses / total number of positions)
 | ChessGPT-Base | normal | 502/600 (83.7%) |
 | ChessGPT-Base | cheating | 486/600 (81.0%) |
 | ChessGPT-Base | pass@K=10 | 597/600 (99.5%) |
-| ChessGPT-Base | modulo | /600 (%) |
+| ChessGPT-Base | modulo | 590/600 (98.3%) |
 | ChessGPT-Chat | normal | 458/600 (76.3%) |
 | ChessGPT-Chat | cheating | 398/600 (66.3%) |
 | ChessGPT-Chat | pass@K=10 | 569/600 (94.8%) |
