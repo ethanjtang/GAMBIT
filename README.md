@@ -81,7 +81,7 @@ Sanity = 1 / (number of invalid parses / total number of positions)
 
 KINGPT vs. C1
 
-Note that, as of 4/27/2026, the full sample of puzzles has not been published on (Z. Tang's GitHub repo for C1)[https://github.com/CSSLab/C1]. This is a rough comparison since my sampling method takes N=100 puzzles without regard for difficulty level.
+Note that, as of 4/27/2026, the full sample of puzzles has not been published on (Z. Tang's GitHub repo for C1)[https://github.com/CSSLab/C1]. This is a rough comparison since my sampling method takes the average score across N=25 puzzles without regard for difficulty level.
 
 | Theme | KINGPT Accuracy (%) | C1 Accuracy (%) |
 |:---|:---|:---|
