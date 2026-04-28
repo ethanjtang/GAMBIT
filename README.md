@@ -15,7 +15,7 @@
 
 <p align="center">
   <img src="misc/pass@k.png" alt="pass@K=10" width="300">
-  <p width="50"></p>
+  &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="misc/llm-modulo.png" alt="llm-modulo" width="300">
 </p>
 
