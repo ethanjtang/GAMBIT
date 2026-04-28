@@ -14,8 +14,8 @@
 ## TLDR
 
 <p align="center">
-  <img src="misc/pass@k.png" alt="pass@K=10" width="450">
-  <img src="misc/llm-modulo.png" alt="llm-modulo" width="450">
+  <img src="misc/pass@k.png" alt="pass@K=10" width="350">
+  <img src="misc/llm-modulo.png" alt="llm-modulo" width="350">
 </p>
 
 
@@ -25,9 +25,7 @@
 ## Code
 
 
-### Model Evaluation on Puzzles
-
-`.\eval_models_on_puzzles`
+### Model Evaluation on Puzzles (`.\eval_models_on_puzzles`)
 
 ### Generate FEN + Best Move Pairs (`.\generate_fen-bestmove_pairs`)
 
@@ -41,21 +39,19 @@
 `sf-variant-results.txt` - Results from Stockfish 18 variants (Base @ depth=20, Base @ thinktime=0.05s, Level 0 @ depth=20) for normal style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
 `chimera-vs-c1-themes.txt` - Results from theme-wide puzzle comparison (n=100 puzzles for set of m=20 themes for 2000 total puzzles) between KINGPT-Chimera and Z. Tang et. al. 2026's model C1.
 
-### Puzzle Samples
-
-`.\sample_puzzles`
+### Puzzle Samples (`.\sample_puzzles`)
 
 `mateIn1_sample.txt` - n=100 random sample of mate-in-1 puzzles from validation set of puzzles (please check out Puzzles HF link at top of repo)
+
 `mateIn2_sample.txt` - n=100 random sample of mate-in-2 puzzles from validation set of puzzles 
+
 `mateIn3_sample.txt` - n=100 random sample of mate-in-3 puzzles from validation set of puzzles 
 
-### Misc
-
-`.\misc`
+### Misc (`.\misc`)
 
 `.\chessLLM_perf_calc.py` - small script to demonstrate how Zhang et. al. 2025's ChessLLM does not achieve their advertised performance rating of 1788 Elo.
 
-## Training/Inference Specs
+## Training/Inference
 
 Training for KINGPT variants was conducted on a 1x A100 GPU node on the ASU Sol Supercomputer.
 
@@ -122,7 +118,7 @@ Puzzle accuracy = number of correct responses to puzzles / total number of puzzl
 
 *KINGPT-Beaver acts as a (approximate) proxy for Zhang et. al. 2025's ChessLLM from ["Complete Chess Games Enable LLM Become Chess Master"](https://arxiv.org/abs/2501.17186v2)
 
-### Overall Model Accuracy
+### Overall Model Sanity (Legal Move %)
 
 Sanity measures how frequently a model chooses a legal/valid move in a given position.
 
@@ -149,15 +145,11 @@ Sanity = 1 / (number of invalid parses / total number of positions)
 
 *KINGPT-Beaver acts as a (approximate) proxy for Zhang et. al. 2025's ChessLLM from ["Complete Chess Games Enable LLM Become Chess Master"](https://arxiv.org/abs/2501.17186v2)
 
-### Comparison vs. C1
-
-KINGPT vs. C1
+### KINGPT Theme-wide Comparison vs. [C1](https://github.com/CSSLab/C1)
 
 Note that, **as of 4/27/2026,** the full sample of puzzles has not been published on [Z. Tang's GitHub repo for C1](https://github.com/CSSLab/C1). This is a rough comparison since my sampling method takes the average score across N=100 puzzles without regard for difficulty level.
 
 KINGPT tests for overall accuracy while Zhang's model C1 tests for first-move accuracy for puzzles. I think overall accuracy is a more accurate representation of chess puzzle proficiency (finding the first move of a puzzle is usually easier than the followup*).
-
-*This is anecdotal from my own experience solving 40k+ rated puzzles on Chess.com
 
 | Theme | KINGPT Accuracy (%) | C1 Accuracy (%) |
 |:---|:---|:---|
@@ -180,7 +172,8 @@ KINGPT tests for overall accuracy while Zhang's model C1 tests for first-move ac
 | skewer | 78.3 |   |
 | trappedPiece | 67.5 |   |
 | xRayAttack | 84.6 |   |
-| zugzwang* | 81.5 |   |
+| zugzwang** | 81.5 |   |
 | overall | 75.3 |  |
 
-*zugzwang is more commonly referred to colloquially as "zuggie"
+* This is anecdotal from my own experience solving 40k+ rated puzzles on Chess.com
+** zugzwang is more commonly referred to colloquially as "zuggie"
