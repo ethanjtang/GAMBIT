@@ -15,6 +15,7 @@
 
 <p align="center">
   <img src="misc/pass@k.png" alt="pass@K=10" width="350">
+  <p width="50"></p>
   <img src="misc/llm-modulo.png" alt="llm-modulo" width="350">
 </p>
 
@@ -29,14 +30,16 @@
 
 ### Generate FEN + Best Move Pairs (`.\generate_fen-bestmove_pairs`)
 
-### Results
-
-`.\results`
+### Results (`.\results`)
 
 `base-model-results.txt` - Results from Open LLaMa and ChessGPT for normal and cheating style prompts on n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+
 `kingpt-results.txt` - Results from KINGPT variants for normal style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+
 `modulo-pass@k-results.txt` - Results from Open LLaMa and ChessGPT for pass@K=10 and modulo style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+
 `sf-variant-results.txt` - Results from Stockfish 18 variants (Base @ depth=20, Base @ thinktime=0.05s, Level 0 @ depth=20) for normal style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+
 `chimera-vs-c1-themes.txt` - Results from theme-wide puzzle comparison (n=100 puzzles for set of m=20 themes for 2000 total puzzles) between KINGPT-Chimera and Z. Tang et. al. 2026's model C1.
 
 ### Puzzle Samples (`.\sample_puzzles`)
