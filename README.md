@@ -2,21 +2,21 @@
 
 **arXiv link COMING SOON**
 
+> <ins>G</ins>ener<ins>a</ins>lization or <ins>M</ins>emorization? <ins>B</ins>r<ins>i</ins>ttleness <ins>T</ins>esting for Chess-Trained Language Models
+
+## Links
+
 [![GitHub](https://img.shields.io/badge/GitHub-KINGPT-black.svg?style=for-the-badge)](https://github.com/ethanjtang/KINGPT) <br>
 [![HuggingFace](https://img.shields.io/badge/🤗_HuggingFace-KINGPT-yellow?style=for-the-badge)](https://huggingface.co/ethanjtang/KINGPT) <br>
 [![HuggingFace](https://img.shields.io/badge/🤗_HuggingFace-Puzzles-yellow?style=for-the-badge)](https://huggingface.co/datasets/ethanjtang/GAMBIT-lichess-puzzle-positions) <br>
 [![HuggingFace](https://img.shields.io/badge/🤗_HuggingFace-SF18%20Selfplay-yellow?style=for-the-badge)](https://huggingface.co/datasets/ethanjtang/GAMBIT-stockfish18-selfplay) <br>
 
-
-> <ins>G</ins>ener<ins>a</ins>lization or <ins>M</ins>emorization? <ins>B</ins>r<ins>i</ins>ttleness <ins>T</ins>esting for Chess-Trained Language Models
-
-
 ## TLDR
 
 <p align="center">
-  <img src="misc/pass@k.png" alt="pass@K=10" width="350">
+  <img src="misc/pass@k.png" alt="pass@K=10" width="300">
   <p width="50"></p>
-  <img src="misc/llm-modulo.png" alt="llm-modulo" width="350">
+  <img src="misc/llm-modulo.png" alt="llm-modulo" width="300">
 </p>
 
 
