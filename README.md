@@ -10,6 +10,15 @@
 
 > <ins>G</ins>ener<ins>a</ins>lization or <ins>M</ins>emorization? <ins>B</ins>r<ins>i</ins>ttleness <ins>T</ins>esting for Chess-Trained Language Models
 
+
+## TLDR
+
+<p align="center">
+  <img src="misc/pass@k.png" alt="pass@K=10" width="450">
+  <img src="misc/llm-modulo.png" alt="llm-modulo" width="450">
+</p>
+
+
 ## Dependencies
 
 
@@ -20,9 +29,7 @@
 
 `.\eval_models_on_puzzles`
 
-### Generate FEN + Best Move Pairs
-
-`.\generate_fen-bestmove_pairs`
+### Generate FEN + Best Move Pairs (`.\generate_fen-bestmove_pairs`)
 
 ### Results
 
