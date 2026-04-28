@@ -10,7 +10,45 @@
 
 > <ins>G</ins>ener<ins>a</ins>lization or <ins>M</ins>emorization? <ins>B</ins>r<ins>i</ins>ttleness <ins>T</ins>esting for Chess-Trained Language Models
 
-### Evaluations
+## Dependencies
+
+
+## Code
+
+
+### Model Evaluation on Puzzles
+
+`.\eval_models_on_puzzles`
+
+### Generate FEN + Best Move Pairs
+
+`.\generate_fen-bestmove_pairs`
+
+### Results
+
+`.\results`
+
+`base-model-results.txt` - Results from Open LLaMa and ChessGPT for normal and cheating style prompts on n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+`kingpt-results.txt` - Results from KINGPT variants for normal style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+`modulo-pass@k-results.txt` - Results from Open LLaMa and ChessGPT for pass@K=10 and modulo style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+`sf-variant-results.txt` - Results from Stockfish 18 variants (Base @ depth=20, Base @ thinktime=0.05s, Level 0 @ depth=20) for normal style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+`chimera-vs-c1-themes.txt` - Results from theme-wide puzzle comparison (n=100 puzzles for set of m=20 themes for 2000 total puzzles) between KINGPT-Chimera and Z. Tang et. al. 2026's model C1.
+
+### Puzzle Samples
+
+`.\sample_puzzles`
+
+`mateIn1_sample.txt` - n=100 random sample of mate-in-1 puzzles from validation set of puzzles (please check out Puzzles HF link at top of repo)
+`mateIn2_sample.txt` - n=100 random sample of mate-in-2 puzzles from validation set of puzzles 
+`mateIn3_sample.txt` - n=100 random sample of mate-in-3 puzzles from validation set of puzzles 
+
+### Misc
+
+`.\misc`
+
+`.\chessLLM_perf_calc.py` - small script to demonstrate how Zhang et. al. 2025's ChessLLM does not achieve their advertised performance rating of 1788 Elo.
+
+## Training/Inference Specs
 
 Training for KINGPT variants was conducted on a 1x A100 GPU node on the ASU Sol Supercomputer.
 
@@ -18,9 +56,9 @@ Inference for Stockfish 18 and KINGPT variants was conducted on my personal 2019
 
 Inference for Open LLaMa 3B and ChessGPT model variants were conducted on a Lambda Labs 1xH100 GPU node.
 
-## Results
+## Evaluations
 
-### Models
+### Models Used
 
 | Name | Model |
 |:---|:---|
@@ -29,6 +67,22 @@ Inference for Open LLaMa 3B and ChessGPT model variants were conducted on a Lamb
 | Open LLaMa | [Open LLaMa 3B V1](https://huggingface.co/openlm-research/open_llama_3b) |
 | ChessGPT-Base | [ChessGPT Base V1](https://huggingface.co/Waterhorse/chessgpt-base-v1) |
 | ChessGPT-Chat | [ChessGPT Chat V1](https://huggingface.co/Waterhorse/chessgpt-chat-v1) |
+
+### Inference Types
+
+For all responses, a seperate judge engine (SF18 instance at depth=20) checks if the provided move is equivalent to the solution provided by Lichess. For mate-in-X puzzles, a move is an alternative solution if it improves the evaluation of the position (mate-in-N -> mate-in-[N-1]).
+
+normal - LLM gives a single response
+
+cheating - Prompt has the evaluation of the position appended before it, LLM gives a single response
+
+> Please refer to `.\eval_models_on_puzzles\eval_all_models_base` for implementation details on normal and cheating style LLM inference.
+
+pass@K=10 - LLM gives 10 responses at temperature=0.7, correct answer if any answer matches solution/passes judgement
+
+modulo - LLM is reprompted with feedback up to 10 times from Critic #1 (move validity) or Critic #2 (move accuracy), correct answer if LLM response passes both critics
+
+> Please refer to `.\eval_models_on_puzzles\eval_all_models_modulo` for implementation details on pass@K=10 and modulo style LLM inference.
 
 ### Overall Model Accuracy
 
