@@ -1,4 +1,4 @@
-# Taken directly from https://en.wikipedia.org/wiki/Performance_rating_(chess), accessed on 4/28/2026
+# Performance rating calculation code taken directly from https://en.wikipedia.org/wiki/Performance_rating_(chess), accessed on 4/28/2026
 # All calculations use Zhang et. al.'s reported figures in https://arxiv.org/abs/2501.17186v2, accessed on 4/28/2026
 
 def expected_score(opponent_ratings: list[float], own_rating: float) -> float:
@@ -47,6 +47,6 @@ opponents = [1395]*100 + [1505]*100 + [1645]*100
 # calculate performance rating
 chessLLMperf = performance_rating(opponents, total_score)
 print(f"ChessLLM performance: {chessLLMperf}")
+
+# check with paper's claims
 assert chessLLMperf == 1788
-
-
