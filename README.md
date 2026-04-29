@@ -4,6 +4,8 @@
 
 > <ins>G</ins>ener<ins>a</ins>lization or <ins>M</ins>emorization? <ins>B</ins>r<ins>i</ins>ttleness <ins>T</ins>esting for Chess-Trained Language Models
 
+This repo is a bit of a mess atm since it attempts to do multiple things at the same time.
+
 ## TLDR
 
 <p align="center">
@@ -98,69 +100,78 @@ For all responses, a seperate judge engine (SF18 instance at depth=20) checks if
 
 > Please refer to `.\eval_models_on_puzzles\eval_all_models_modulo` for implementation details on pass@K=10 and modulo style LLM inference.
 
-### Overall Model Accuracy
+### Model Accuracy (Best Move %)
 
-Overall accuracy = number of correct responses / total number of positions.
+Overall accuracy measures how frequently a model chooses the best move in any given puzzle position.
 
-A puzzle is considered solved correctly if a model generates a correct response to ALL puzzle positions.
+$\text{Overall accuracy} = \frac{\text{\# correct responses}}{\text{total \# positions}}$
 
-Puzzle accuracy = number of correct responses to puzzles / total number of puzzles
+A puzzle is considered solved correctly if a model generates a correct response to **all** positions in the puzzle.
+
+Puzzle accuracy measures how frequently a model solves all puzzle positions for a given puzzle for all puzzles tested.
+
+$\text{Puzzle accuracy} = \frac{\text{\# puzzles solved correctly}}{\text{total \# puzzles}}$
 
 | Model | Inference Type | Puzzle Accuracy | Overall Accuracy |
 |:---|:---|---:|---:|
-| Stockfish 18, Base | depth=20 | 300/300 (100.0%) | 600/600 (100.0%) |
+| Stockfish 18, Base | depth=20 | 300/300 (100.0%) | **600/600 (100.0%)** |
 | Stockfish 18, Base | time=0.05s | 300/300 (100.0%) | 600/600 (100.0%) |
-| Stockfish 18, Level 0 | depth=20 | 192/300 (64.0%) | 476/600 (79.3%) |
+| Stockfish 18, Level 0 | depth=20 | 192/300 (64.0%) | **476/600 (79.3%)** |
 | KINGPT-Woodpecker | normal | 217/300 (72.3%) | 492/600 (82.0%) |
 | KINGPT-Beaver* | normal | 3/300 (1.0%) | 10/600 (1.7%) |
-| KINGPT-Chimera | normal | 225/300 (75.0%) | 510/600 (85.0%) |
+| KINGPT-Chimera | normal | 225/300 (75.0%) | **510/600 (85.0%)** |
 | Open LLaMa 3B | normal | 0/300 (0.0%) | 1/600 (0.2%) |
 | Open LLaMa 3B | cheating | 5/300 (1.7%) | 13/600 (2.2%) |
 | Open LLaMa 3B | pass@K=10 | 3/300 (1.0%) | 20/600 (3.3%) |
 | Open LLaMa 3B | modulo | 8/300 (2.7%) | 70/600 (11.7%) |
 | ChessGPT-Base | normal | 46/300 (15.3%) | 166/600 (27.7%) |
 | ChessGPT-Base | cheating | 48/300 (16.0%) | 182/600 (30.3%) |
-| ChessGPT-Base | pass@K=10 | 115/300 (38.3%) | 353/600 (58.8%) |
+| ChessGPT-Base | pass@K=10 | 115/300 (38.3%) | **353/600 (58.8%)** |
 | ChessGPT-Base | Modulo | 54/300 (18.0%) | 202/600 (33.7%) |
 | ChessGPT-Chat | normal | 30/300 (10.0%) | 126/600 (21.0%) |
 | ChessGPT-Chat | cheating | 37/300 (12.3%) | 153/600 (25.5%) |
-| ChessGPT-Chat | pass@K=10 | 61/300 (20.3%) | 227/600 (37.8%) |
+| ChessGPT-Chat | pass@K=10 | 61/300 (20.3%) | **227/600 (37.8%)** |
 | ChessGPT-Chat | modulo | 41/300 (13.7%) | 176/600 (29.3%) |
 
 *KINGPT-Beaver acts as a (approximate) proxy for Zhang et. al. 2025's ChessLLM from ["Complete Chess Games Enable LLM Become Chess Master"](https://arxiv.org/abs/2501.17186v2)
 
-### Overall Model Sanity (Legal Move %)
+### Model Sanity (Legal Move %)
 
 Sanity measures how frequently a model chooses a legal/valid move in a given position.
 
-Sanity = 1 / (number of invalid parses / total number of positions)
+$\text{Sanity} = 1 - \frac{\text{\# invalid parses}}{\text{\# positions}}$
 
 | Model | Inference Type | Sanity |
 |:---|:---|---:|
 | Stockfish 18 | all | n/a (100%) |
 | KINGPT-Woodpecker | normal | 591/600 (98.5%) |
 | KINGPT-Beaver | normal | 170/600 (28.3%) |
-| KINGPT-Chimera | normal | 597/600 (99.5%) |
+| KINGPT-Chimera | normal | **597/600 (99.5%)** |
 | Open LLaMa 3B | normal | 33/600 (5.5%) |
 | Open LLaMa 3B | cheating | 120/600 (20.0%) |
 | Open LLaMa 3B | pass@K=10 | 309/600 (51.5%) |
 | Open LLaMa 3B | modulo | 488/600 (81.3%) |
 | ChessGPT-Base | normal | 502/600 (83.7%) |
 | ChessGPT-Base | cheating | 486/600 (81.0%) |
-| ChessGPT-Base | pass@K=10 | 597/600 (99.5%) |
+| ChessGPT-Base | pass@K=10 | **597/600 (99.5%)** |
 | ChessGPT-Base | modulo | 590/600 (98.3%) |
 | ChessGPT-Chat | normal | 458/600 (76.3%) |
 | ChessGPT-Chat | cheating | 398/600 (66.3%) |
 | ChessGPT-Chat | pass@K=10 | 569/600 (94.8%) |
-| ChessGPT-Chat | modulo | 584/600 (97.3%) |
+| ChessGPT-Chat | modulo | **584/600 (97.3%)** |
 
-### [KINGPT](https://github.com/ethanjtang/KINGPT) Theme-wide Comparison vs. [C1](https://github.com/CSSLab/C1)
+### [KINGPT](https://github.com/ethanjtang/KINGPT) Theme-wide Comparison vs. [C1-4B](https://github.com/CSSLab/C1)
 
-Note that, **as of 4/28/2026,** the full sample of puzzles has not been published on [Z. Tang's GitHub repo for C1](https://github.com/CSSLab/C1). This is a rough comparison since my sampling method takes the average score across N=100 puzzles without regard for difficulty level.
+**As of 4/28/2026,** the full sample of puzzles has not been published on [Z. Tang's GitHub repo for C1](https://github.com/CSSLab/C1). This is a rough comparison since my sampling method takes the average score across N=100 puzzles without regard for difficulty level.
 
-KINGPT tests for overall accuracy while Z. Tang's model C1 tests for first-move accuracy for puzzles. IMO overall accuracy is a more accurate representation of chess puzzle proficiency (finding the first move of a puzzle is usually easier than the followup*).
+KINGPT tests for overall accuracy while Z. Tang's model C1 tests for first-move accuracy for puzzles. 
+
+IMO overall accuracy is a more accurate representation of chess puzzle proficiency since finding the first move of a puzzle is usually* easier than the followup.
+
+<ins>Key</ins>
 
 **KINGPT -** KINGPT-Chimera
+
 **C1 -** C1-4B
 
 | Theme | KINGPT Accuracy (%) | C1 Accuracy (%) |
@@ -170,25 +181,26 @@ KINGPT tests for overall accuracy while Z. Tang's model C1 tests for first-move 
 | backRankMate | 96.5 | 84 |
 | capturingDefender | 74.4 | 56 |
 | defensiveMove | 60.1 | 60 |
-**| deflection | 75.9 | 36 |**
+| deflection | **75.9** | **36** |
 | discoveredAttack | 69.7 | 44 |
 | doubleCheck | 75.9 | 52 |
-**| fork | 71.4 | 36 |**
+| fork | **71.4** | **36** |
 | hangingPiece | 72.6 | 64 |
 | mateIn1 | 87.0 | 64 |
 | mateIn2 | 89.0 | 56 |
-**| pin | 69.3 | 28 |**
+| pin | **69.3** | **28** |
 | promotion | 76.1 | 52 |
 | queensideAttack | 75.9 | 68 |
 | sacrifice | 72.3 | 60 |
 | skewer | 78.3 | 52 |
-**| trappedPiece | 67.5 | 4 |**
+| trappedPiece | 67.5 | 4 |
 | xRayAttack | 84.6 | 52 |
 | zugzwang** | 81.5 | 76 |
-**| overall | 75.3 | 53.6 |**
+| **overall** | **75.3** | **53.6** |
 
-* This is anecdotal from my own experience solving 40k+ rated puzzles on Chess.com
-** zugzwang is more commonly referred to colloquially as "zuggie"
+*This is anecdotal from my own experience solving 40k+ rated puzzles on Chess.com
+
+**zugzwang is more commonly referred to colloquially as "zuggie"
 
 ## Links
 
