@@ -18,7 +18,7 @@ This repo is a bit of a mess atm since it attempts to do multiple things at the 
 
 ### Dependencies
 
-`pip install torch transformers accelerate python-chess numpy sentencepiece protobuf`
+```pip install torch transformers accelerate python-chess numpy sentencepiece protobuf```
 
 You also will need to download the appropiate [Stockfish 18 binary](https://stockfishchess.org/download/) to check for alternate puzzle solutions.
 
