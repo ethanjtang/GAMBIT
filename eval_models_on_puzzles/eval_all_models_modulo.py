@@ -88,6 +88,12 @@ LLM_MODELS = [
         'path': 'Waterhorse/chessgpt-base-v1',
         'llama': False,
     },
+    # RedPajama 3B Base
+    {
+        'name': 'red_pajama_3b_base',
+        'path': 'togethercomputer/RedPajama-INCITE-Base-3B-v1',
+        'llama': False,
+    },
 ]
 
 # ============================

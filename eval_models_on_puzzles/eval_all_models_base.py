@@ -97,20 +97,13 @@ LLM_MODELS = [
         'path': 'Waterhorse/chessgpt-base-v1',
         'llama': False,
     },
-    # PatzerLM aka ChessLLM reproduction
-    # {
-    #     'name': 'PatzerLM',
-    #     'path': 'ethanjtang/PatzerLM',
-    #     'llama': False,
-    # },
+    # RedPajama 3B Base
+    {
+        'name': 'red_pajama_3b_base',
+        'path': 'togethercomputer/RedPajama-INCITE-Base-3B-v1',
+        'llama': False,
+    },
 ]
-
-'''
-Models to test afterwards:
-- KINGPT: 3 SLMs (small/stupid language models trained by yours truly) trained on corpus of FEN + best move pairs
-- PatzerLM: Recreation of ChessLLM from "Complete Chess Games Enable LLM Become a Chess Master" by Zhang in 2025
-- LLM-Modulo variants of ChessGPT, OpenLLaMa, PatzerLM
-'''
 
 # ============================
 # PUZZLE STUFF
