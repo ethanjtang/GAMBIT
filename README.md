@@ -4,6 +4,13 @@
 
 > <ins>G</ins>ener<ins>a</ins>lization or <ins>M</ins>emorization? <ins>B</ins>r<ins>i</ins>ttleness <ins>T</ins>esting for Chess-Trained Language Models
 
+## Relevant Links
+
+[![GitHub](https://img.shields.io/badge/GitHub-KINGPT-black.svg?style=for-the-badge)](https://github.com/ethanjtang/KINGPT) <br>
+[![HuggingFace](https://img.shields.io/badge/🤗_HuggingFace-KINGPT-yellow?style=for-the-badge)](https://huggingface.co/ethanjtang/KINGPT) <br>
+[![HuggingFace](https://img.shields.io/badge/🤗_HuggingFace-Puzzles-yellow?style=for-the-badge)](https://huggingface.co/datasets/ethanjtang/GAMBIT-lichess-puzzle-positions) <br>
+[![HuggingFace](https://img.shields.io/badge/🤗_HuggingFace-SF18%20Selfplay-yellow?style=for-the-badge)](https://huggingface.co/datasets/ethanjtang/GAMBIT-stockfish18-selfplay) <br>
+
 ## TLDR
 
 <p align="center">
@@ -11,13 +18,6 @@
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="misc/llm-modulo.png" alt="llm-modulo" width="350">
 </p>
-
-## Links
-
-[![GitHub](https://img.shields.io/badge/GitHub-KINGPT-black.svg?style=for-the-badge)](https://github.com/ethanjtang/KINGPT) <br>
-[![HuggingFace](https://img.shields.io/badge/🤗_HuggingFace-KINGPT-yellow?style=for-the-badge)](https://huggingface.co/ethanjtang/KINGPT) <br>
-[![HuggingFace](https://img.shields.io/badge/🤗_HuggingFace-Puzzles-yellow?style=for-the-badge)](https://huggingface.co/datasets/ethanjtang/GAMBIT-lichess-puzzle-positions) <br>
-[![HuggingFace](https://img.shields.io/badge/🤗_HuggingFace-SF18%20Selfplay-yellow?style=for-the-badge)](https://huggingface.co/datasets/ethanjtang/GAMBIT-stockfish18-selfplay) <br>
 
 ## Code
 
@@ -143,21 +143,21 @@ $\text{Puzzle accuracy} = \frac{\text{puzzles solved correctly}}{\text{total num
 | Open LLaMa 3B | normal | 0/300 (0.0%) | 1/600 (0.2%) |
 | Open LLaMa 3B | cheating | 5/300 (1.7%) | 13/600 (2.2%) |
 | Open LLaMa 3B | pass@K=10 | 3/300 (1.0%) | 20/600 (3.3%) |
-| Open LLaMa 3B | modulo | 8/300 (2.7%) | 70/600 (11.7%) |
+| Open LLaMa 3B | modulo | 8/300 (2.7%) | **70/600 (11.7%)** |
 | Red Pajama 3B | normal | 0/300 (0.0%) | 4/600 (0.7%) |
 | Red Pajama 3B | cheating | 0/300 (0.0%) | 0/600 (0.0%) |
 | Red Pajama 3B | pass@K=10 | 1/300 (0.3%) | 9/600 (1.5%) |
-| Red Pajama 3B | modulo | 30/300 (10.0%) | 125/600 (20.8%) |
+| Red Pajama 3B | modulo | 30/300 (10.0%) | **125/600 (20.8%)** |
 | ChessGPT-Base | normal | 46/300 (15.3%) | 166/600 (27.7%) |
 | ChessGPT-Base | cheating | 48/300 (16.0%) | 182/600 (30.3%) |
 | ChessGPT-Base | pass@K=10 | 115/300 (38.3%) | **353/600 (58.8%)** |
-| ChessGPT-Base | Modulo | 54/300 (18.0%) | 202/600 (33.7%) |
+| ChessGPT-Base | Modulo | 54/300 (18.0%) | **202/600 (33.7%)** |
 | ChessGPT-Chat | normal | 30/300 (10.0%) | 126/600 (21.0%) |
 | ChessGPT-Chat | cheating | 37/300 (12.3%) | 153/600 (25.5%) |
 | ChessGPT-Chat | pass@K=10 | 61/300 (20.3%) | **227/600 (37.8%)** |
-| ChessGPT-Chat | modulo | 41/300 (13.7%) | 176/600 (29.3%) |
+| ChessGPT-Chat | modulo | 41/300 (13.7%) | **176/600 (29.3%)** |
 
-*KINGPT-Beaver acts as a (approximate) proxy for Zhang et. al. 2025's ChessLLM from ["Complete Chess Games Enable LLM Become Chess Master"](https://arxiv.org/abs/2501.17186v2)
+*KINGPT-Beaver acts as a (very approximate) proxy for Zhang et. al. 2025's ChessLLM from ["Complete Chess Games Enable LLM Become Chess Master"](https://arxiv.org/abs/2501.17186v2), testing whether training on position + best move pairs from game data generalizes to puzzle positions. I note that solving puzzle positions and playing full games is the same core task of finding the best move in any given position.
 
 ### Model Sanity (Legal Move %)
 
@@ -167,18 +167,18 @@ $\text{Sanity} = 1 - \frac{\text{invalid parses}}{\text{total number of position
 
 | Model | Inference Type | Sanity |
 |:---|:---|---:|
-| Stockfish 18 | all | n/a (100%) |
+| Stockfish 18 | all | **n/a (100%)** |
 | KINGPT-Woodpecker | normal | 591/600 (98.5%) |
 | KINGPT-Beaver | normal | 170/600 (28.3%) |
 | KINGPT-Chimera | normal | **597/600 (99.5%)** |
 | Open LLaMa 3B | normal | 33/600 (5.5%) |
 | Open LLaMa 3B | cheating | 120/600 (20.0%) |
 | Open LLaMa 3B | pass@K=10 | 309/600 (51.5%) |
-| Open LLaMa 3B | modulo | 488/600 (81.3%) |
+| Open LLaMa 3B | modulo | **488/600 (81.3%)** |
 | Red Pajama 3B | normal | 116/600 (19.3%) |
 | Red Pajama 3B | cheating | 19/600 (3.1%) |
 | Red Pajama 3B | pass@K=10 | 305/600 (50.8%) |
-| Red Pajama 3B | modulo | 572/600 (95.3%) |
+| Red Pajama 3B | modulo | **572/600 (95.3%)** |
 | ChessGPT-Base | normal | 502/600 (83.7%) |
 | ChessGPT-Base | cheating | 486/600 (81.0%) |
 | ChessGPT-Base | pass@K=10 | **597/600 (99.5%)** |
@@ -188,11 +188,11 @@ $\text{Sanity} = 1 - \frac{\text{invalid parses}}{\text{total number of position
 | ChessGPT-Chat | pass@K=10 | 569/600 (94.8%) |
 | ChessGPT-Chat | modulo | **584/600 (97.3%)** |
 
-### [KINGPT](https://github.com/ethanjtang/KINGPT) Theme-wide Comparison vs. [C1-4B](https://github.com/CSSLab/C1)
+### KINGPT Theme-wide Comparison vs. C1-4B
 
-**As of 4/28/2026,** the full sample of puzzles has not been published on [Z. Tang's GitHub repo for C1](https://github.com/CSSLab/C1). This is a rough comparison since my sampling method takes the average score across N=100 puzzles without regard for difficulty level.
+**As of 4/28/2026,** the full sample of puzzles has not been published on [Z. Tang's GitHub repo for C1-4B](https://github.com/CSSLab/C1). This is a rough comparison since my sampling method takes the average score across N=100 puzzles without regard for difficulty level.
 
-KINGPT tests for overall accuracy while Z. Tang's model C1 tests for first-move accuracy for puzzles. 
+[KINGPT](https://github.com/ethanjtang/KINGPT) tests for overall accuracy while Z. Tang's model [C1-4B](https://github.com/CSSLab/C1) tests for first-move accuracy for puzzles. 
 
 IMO overall accuracy is a more accurate representation of chess puzzle proficiency since finding the first move of a puzzle is usually* easier than the followup.
 
