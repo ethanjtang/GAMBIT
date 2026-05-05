@@ -199,7 +199,7 @@ $\text{Sanity} = 1 - \frac{\text{number of invalid parses}}{\text{total number o
 **C1 -** [C1-4B](https://github.com/CSSLab/C1)
 
 | Theme | KINGPT Accuracy (%) | C1 Accuracy (%) |
-|:---|:---|:---|
+|:---|---:|---:|
 | advancedPawn | 61.0 | 64.0 |
 | attraction | 64.0 | 64.0 |
 | backRankMate | 94.0 | 84.0 |
@@ -220,7 +220,7 @@ $\text{Sanity} = 1 - \frac{\text{number of invalid parses}}{\text{total number o
 | trappedPiece | 48.0 | 4.0 |
 | xRayAttack | 75.0 | 52.0 |
 | zugzwang* | 79.0 | 76.0 |
-| **overall** | **70.4** | **53.6.0** |
+| **overall** | **70.4** | **53.6** |
 
 *zugzwang is more commonly referred to colloquially as "zuggie"
 
