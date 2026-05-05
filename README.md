@@ -219,7 +219,7 @@ $\text{Sanity} = 1 - \frac{\text{number of invalid parses}}{\text{total number o
 | skewer | 75.0 | 52.0 |
 | trappedPiece | 48.0 | 4.0 |
 | xRayAttack | 75.0 | 52.0 |
-| zugzwang** | 79.0 | 76.0 |
+| zugzwang* | 79.0 | 76.0 |
 | **overall** | **70.4** | **53.6.0** |
 
 *zugzwang is more commonly referred to colloquially as "zuggie"
