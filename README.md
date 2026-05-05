@@ -124,13 +124,13 @@ For all responses, a seperate judge engine (SF18 instance at depth=20) checks if
 
 Overall accuracy measures how frequently a model chooses the best move in any given puzzle position.
 
-$\text{Overall accuracy} = \frac{\text{\# correct responses}}{\text{total \# of positions}}$
+$\text{Overall accuracy} = \frac{\text{number of correct responses}}{\text{total number of positions}}$
 
 A puzzle is considered solved correctly if a model generates a correct response to **all** positions in the puzzle.
 
 Puzzle accuracy measures how frequently a model solves all puzzle positions for a given puzzle for all puzzles tested.
 
-$\text{Puzzle accuracy} = \frac{\text{\# puzzles solved}}{\text{total \# of puzzles}}$
+$\text{Puzzle accuracy} = \frac{\text{number of puzzles solved}}{\text{total number of puzzles}}$
 
 | Model | Inference Type | Puzzle Accuracy | Overall Accuracy |
 |:---|:---|---:|---:|
@@ -163,7 +163,7 @@ $\text{Puzzle accuracy} = \frac{\text{\# puzzles solved}}{\text{total \# of puzz
 
 Sanity measures how frequently a model chooses a legal/valid move in a given position.
 
-$\text{Sanity} = 1 - \frac{\text{\# invalid parses}}{\text{total \# of positions}}$
+$\text{Sanity} = 1 - \frac{\text{number of invalid parses}}{\text{total number of positions}}$
 
 | Model | Inference Type | Sanity |
 |:---|:---|---:|
