@@ -108,15 +108,15 @@ Inference for Red Pajama 3B was conducted on a Lambda Labs 1xA10 GPU node.
 
 For all responses, a seperate judge engine (SF18 instance at depth=20) checks if the provided move is equivalent to the solution provided by Lichess. For mate-in-X puzzles, a move is an alternative solution if it improves the evaluation of the position (mate-in-N -> mate-in-[N-1]).
 
-**normal -** LLM gives a single response
+**normal -** LLM gives a single response.
 
-**cheating -** Prompt has the evaluation of the position appended before it, LLM gives a single response
+**cheating -** Prompt has the evaluation of the position appended before it, LLM gives a single response.
 
 > Please refer to `.\eval_models_on_puzzles\eval_all_models_base` for implementation details on normal and cheating style LLM inference.
 
-**pass@K=10 -** LLM gives 10 responses at temperature=0.7, correct answer if any answer matches solution/passes judgement
+**pass@K=10 -** LLM gives 10 responses at temperature=0.7, correct answer if any of the K answers matches solution/passes judgement.
 
-**modulo -** LLM is reprompted with feedback up to 10 times from Critic #1 (move validity) or Critic #2 (move accuracy), correct answer if LLM response passes both critics
+**modulo -** LLM is reprompted with feedback up to 10 times from Critic #1 (move validity) or Critic #2 (move accuracy), correct answer if LLM response passes both critics.
 
 > Please refer to `.\eval_models_on_puzzles\eval_all_models_modulo` for implementation details on pass@K=10 and modulo style LLM inference.
 
