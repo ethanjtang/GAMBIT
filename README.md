@@ -6,8 +6,8 @@
 
 ## Relevant Links
 
-[![GitHub](https://img.shields.io/badge/GitHub-KINGPT-black.svg?style=for-the-badge)](https://github.com/ethanjtang/KINGPT) <br>
-[![HuggingFace](https://img.shields.io/badge/🤗_HuggingFace-KINGPT-yellow?style=for-the-badge)](https://huggingface.co/ethanjtang/KINGPT) <br>
+[![GitHub](https://img.shields.io/badge/GitHub-KinGPT-black.svg?style=for-the-badge)](https://github.com/ethanjtang/KinGPT) <br>
+[![HuggingFace](https://img.shields.io/badge/🤗_HuggingFace-KinGPT-yellow?style=for-the-badge)](https://huggingface.co/ethanjtang/KinGPT) <br>
 [![HuggingFace](https://img.shields.io/badge/🤗_HuggingFace-Puzzles-yellow?style=for-the-badge)](https://huggingface.co/datasets/ethanjtang/GAMBIT-lichess-puzzle-positions) <br>
 [![HuggingFace](https://img.shields.io/badge/🤗_HuggingFace-SF18%20Selfplay-yellow?style=for-the-badge)](https://huggingface.co/datasets/ethanjtang/GAMBIT-stockfish18-selfplay) <br>
 
@@ -31,51 +31,51 @@ You also will need to download the appropiate [Stockfish 18 binary](https://stoc
 
 ### Model Evaluation on Puzzles (`.\eval_models_on_puzzles`)
 
-`eval_all_models_base.py` - Evaluate all Open LLaMa, Red Pajama, ChessGPT models on normal and cheating style prompts for the n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+`eval_all_models_base.py` - Evaluate all OpenLLaMa, RedPajama, ChessGPT models on normal and cheating-style prompts for the n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
 
-`eval_all_models_modulo.py` - Evaluate all Open LLaMa, Red Pajama, ChessGPT models on pass@K=10 and modulo style prompts for the (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+`eval_all_models_modulo.py` - Evaluate all OpenLLaMa, RedPajama, ChessGPT models on pass@K=10 and modulo-style prompts for the (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
 
 `eval_sf18_variants.py` - Evaluate all SF variants (Base depth=20, Base thinktime=0.05s, Level 0 depth=20) for the (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
 
 `puzzle_utils.py` - Contain helper functions sample_puzzles(filepath, n), get_engine(), and check_position_accuracy(response, fen, best_move_uci, best_move_san, engine) used by all other eval files.
 
-> KINGPT puzzle evaluation code is located in its [respective repository](https://github.com/ethanjtang/KINGPT)
+> KinGPT puzzle evaluation code is located in its [respective repository](https://github.com/ethanjtang/KinGPT)
 
 ### Generate FEN + Best Move Pairs (`.\generate_fen-bestmove_pairs`)
 
-`extract-puzzles.py` - Read puzzles from the Lichess Puzzle Database CSV file into text format, **filtering out validation set puzzle positions (at FEN-level) from the training data set** for KINGPT-Woodpecker
+`extract-puzzles.py` - Read puzzles from the Lichess Puzzle Database CSV file into text format, **filtering out validation set puzzle positions (at FEN-level) from the training data set** for KinGPT-Woodpecker.
 
-`sf18-selfplay.py` - Generate N=50 selfplay games between Stockfish 18 Base and Stockfish 18 variants from Levels 0-20. Each side plays 25W and 25B for a total of 1050 selfplay games at depth=15. Converts all unique position + best move pairs played by reasonable players (aka the game ended in a win/draw for the recorded side) to text.
+`sf18-selfplay.py` - Generate N=50 selfplay games between Stockfish 18 Base and Stockfish 18 variants from Levels 0-20. Each side plays 25W and 25B for a total of 1050 selfplay games at depth=15. Converts all unique position + best move pairs played by reasonable players (aka the game ended in a win/draw for the recorded side) to text as training data for KinGPT-Beaver.
 
 ### Results (`.\results`)
 
-`base-model-results.txt` - Results from Open LLaMa and ChessGPT for normal and cheating style prompts on n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+`base-model-results.txt` - Results from OpenLLaMa and ChessGPT for normal and cheating-style prompts on n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
 
-`kingpt-results.txt` - Results from KINGPT variants for normal style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+`kingpt-results.txt` - Results from KinGPT variants for normal-style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
 
-`modulo-pass@k-results.txt` - Results from Open LLaMa and ChessGPT for pass@K=10 and modulo style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+`modulo-pass@k-results.txt` - Results from OpenLLaMa and ChessGPT for pass@K=10 and modulo-style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
 
-`sf-variant-results.txt` - Results from Stockfish 18 variants (Base @ depth=20, Base @ thinktime=0.05s, Level 0 @ depth=20) for normal style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+`sf-variant-results.txt` - Results from Stockfish 18 variants (Base @ depth=20, Base @ thinktime=0.05s, Level 0 @ depth=20) for normal-style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
 
-> I came up with the idea to test on Red Pajama 3B Base (base model used to finetune ChessGPT variants) after performing my initial set of tests, so the results files are separate.
+> I came up with the idea to test on RedPajama 3B Base (base model used to finetune ChessGPT variants) after performing my initial set of tests, so the results files are separate.
 
-`redpajama-base-results.txt` - Results from Red Pajama for normal and cheating style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+`redpajama-base-results.txt` - Results from RedPajama for normal and cheating-style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
 
-`redpajama-modulo-pass@k-results.txt` - Results from Red Pajama for pass@K=10 and modulo style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
+`redpajama-modulo-pass@k-results.txt` - Results from RedPajama for pass@K=10 and modulo-style prompts on (same) n=300 sample of n=100 mate-in-1, mate-in-2, and mate-in-3 theme puzzles.
 
-`chimera-vs-c1-themes.txt` - Results from theme-wide puzzle comparison (n=100 puzzles for set of m=20 themes for 2000 total puzzles) between KINGPT-Chimera and Z. Tang et. al. 2026's model C1.
+`chimera-vs-c1-themes.txt` - Results from theme-wide puzzle comparison (n=100 puzzles for set of m=20 themes for 2000 total puzzles) between KinGPT-Chimera and Z. Tang et. al. 2026's model C1-4B.
 
-`modulo-pass@K-detailed-traces.txt` - Full trace from n=1 sample of mate-in-3 puzzles from Open LLaMa, ChessGPT, and Red Pajama with full output for LLM-Modulo loop reprompting and pass@K=10 prompting.
+`modulo-pass@K-detailed-traces.txt` - Full trace from n=1 sample of mate-in-3 puzzles from OpenLLaMa, ChessGPT, and RedPajama with full output for LLM-Modulo loop reprompting and pass@K=10 prompting.
 
 ### Puzzle Samples (`.\sample_puzzles`)
 
-`mateIn1_sample.txt` - n=100 random sample of mate-in-1 puzzles from validation set of puzzles (please check out Puzzles HF link at top of repo)
+`mateIn1_sample.txt` - n=100 random sample of mate-in-1 puzzles from validation set of puzzles (please check out Puzzles HF link at top of repo).
 
-`mateIn2_sample.txt` - n=100 random sample of mate-in-2 puzzles from validation set of puzzles 
+`mateIn2_sample.txt` - n=100 random sample of mate-in-2 puzzles from validation set of puzzles.
 
-`mateIn3_sample.txt` - n=100 random sample of mate-in-3 puzzles from validation set of puzzles 
+`mateIn3_sample.txt` - n=100 random sample of mate-in-3 puzzles from validation set of puzzles.
 
-`\chimera-vs-c1-samples` - n=100 puzzles from n=20 themes, testing KINGPT-Chimera on the same themes (but not same set of puzzles, see below for why) as Z. Tang's model C1-4B.
+`\chimera-vs-c1-samples` - n=100 puzzles from n=20 themes, testing KinGPT-Chimera on the same themes (but not same set of puzzles, see below for why) as Z. Tang's model C1-4B.
 
 ### Misc (`.\misc`)
 
@@ -83,13 +83,13 @@ You also will need to download the appropiate [Stockfish 18 binary](https://stoc
 
 ## Training/Inference
 
-Training for KINGPT variants was conducted on a 1x A100 GPU node on the ASU Sol Supercomputer.
+Training for KinGPT variants was conducted on a 1x A100 GPU node on the ASU Sol Supercomputer.
 
-Inference for Stockfish 18 and KINGPT variants was conducted on my personal 2019 computer with a Ryzen 7 5800X, 32 GB DDR4 2133 MHz RAM, and GTX 1060 6GB (I would love to upgrade it, but...).
+Inference for Stockfish 18 and KinGPT variants was conducted on my personal 2019 computer with a Ryzen 7 5800X, 32 GB DDR4 2133 MHz RAM, and GTX 1060 6GB (I would love to upgrade it, but...).
 
-Inference for Open LLaMa 3B and ChessGPT model variants was conducted on a Lambda Labs 1xH100 GPU node.
+Inference for OpenLLaMa 3B and ChessGPT model variants was conducted on a Lambda Labs 1xH100 GPU node.
 
-Inference for Red Pajama 3B was conducted on a Lambda Labs 1xA10 GPU node.
+Inference for RedPajama 3B was conducted on a Lambda Labs 1xA10 GPU node.
 
 ## Evaluations
 
@@ -98,9 +98,9 @@ Inference for Red Pajama 3B was conducted on a Lambda Labs 1xA10 GPU node.
 | Name | Model |
 |:---|:---|
 | Stockfish 18 | [Stockfish 18](https://stockfishchess.org/) |
-| KINGPT | [KINGPT](https://huggingface.co/ethanjtang/KINGPT) |
-| Open LLaMa | [Open LLaMa 3B V1](https://huggingface.co/openlm-research/open_llama_3b) |
-| Red Pajama | [Red Pajama 3B Base](https://huggingface.co/togethercomputer/RedPajama-INCITE-Base-3B-v1) |
+| KinGPT | [KinGPT](https://huggingface.co/ethanjtang/KinGPT) |
+| OpenLLaMa | [Open LLaMa 3B V1](https://huggingface.co/openlm-research/open_llama_3b) |
+| RedPajama | [Red Pajama 3B Base](https://huggingface.co/togethercomputer/RedPajama-INCITE-Base-3B-v1) |
 | ChessGPT-Base | [ChessGPT Base V1](https://huggingface.co/Waterhorse/chessgpt-base-v1) |
 | ChessGPT-Chat | [ChessGPT Chat V1](https://huggingface.co/Waterhorse/chessgpt-chat-v1) |
 
@@ -137,17 +137,17 @@ $\text{Puzzle accuracy} = \frac{\text{number of puzzles solved}}{\text{total num
 | Stockfish 18, Base | depth=20 | 300/300 (100.0%) | **600/600 (100.0%)** |
 | Stockfish 18, Base | time=0.05s | 300/300 (100.0%) | 600/600 (100.0%) |
 | Stockfish 18, Level 0 | depth=20 | 192/300 (64.0%) | **476/600 (79.3%)** |
-| KINGPT-Woodpecker | normal | 217/300 (72.3%) | 492/600 (82.0%) |
-| KINGPT-Beaver* | normal | 3/300 (1.0%) | 10/600 (1.7%) |
-| KINGPT-Chimera | normal | 225/300 (75.0%) | **510/600 (85.0%)** |
-| Open LLaMa 3B | normal | 0/300 (0.0%) | 1/600 (0.2%) |
-| Open LLaMa 3B | cheating | 5/300 (1.7%) | 13/600 (2.2%) |
-| Open LLaMa 3B | pass@K=10 | 3/300 (1.0%) | **20/600 (3.3%)** |
-| Open LLaMa 3B | modulo | 8/300 (2.7%) | **70/600 (11.7%)** |
-| Red Pajama 3B | normal | 0/300 (0.0%) | 4/600 (0.7%) |
-| Red Pajama 3B | cheating | 0/300 (0.0%) | 0/600 (0.0%) |
-| Red Pajama 3B | pass@K=10 | 1/300 (0.3%) | **9/600 (1.5%)** |
-| Red Pajama 3B | modulo | 30/300 (10.0%) | **125/600 (20.8%)** |
+| KinGPT-Woodpecker | normal | 217/300 (72.3%) | 492/600 (82.0%) |
+| KinGPT-Beaver* | normal | 3/300 (1.0%) | 10/600 (1.7%) |
+| KinGPT-Chimera | normal | 225/300 (75.0%) | **510/600 (85.0%)** |
+| OpenLLaMa 3B | normal | 0/300 (0.0%) | 1/600 (0.2%) |
+| OpenLLaMa 3B | cheating | 5/300 (1.7%) | 13/600 (2.2%) |
+| OpenLLaMa 3B | pass@K=10 | 3/300 (1.0%) | **20/600 (3.3%)** |
+| OpenLLaMa 3B | modulo | 8/300 (2.7%) | **70/600 (11.7%)** |
+| RedPajama 3B | normal | 0/300 (0.0%) | 4/600 (0.7%) |
+| RedPajama 3B | cheating | 0/300 (0.0%) | 0/600 (0.0%) |
+| RedPajama 3B | pass@K=10 | 1/300 (0.3%) | **9/600 (1.5%)** |
+| RedPajama 3B | modulo | 30/300 (10.0%) | **125/600 (20.8%)** |
 | ChessGPT-Base | normal | 46/300 (15.3%) | 166/600 (27.7%) |
 | ChessGPT-Base | cheating | 48/300 (16.0%) | 182/600 (30.3%) |
 | ChessGPT-Base | pass@K=10 | 115/300 (38.3%) | **353/600 (58.8%)** |
@@ -157,7 +157,7 @@ $\text{Puzzle accuracy} = \frac{\text{number of puzzles solved}}{\text{total num
 | ChessGPT-Chat | pass@K=10 | 61/300 (20.3%) | **227/600 (37.8%)** |
 | ChessGPT-Chat | modulo | 41/300 (13.7%) | **176/600 (29.3%)** |
 
-*KINGPT-Beaver acts as a (very approximate) proxy for Zhang et. al. 2025's ChessLLM from ["Complete Chess Games Enable LLM Become Chess Master"](https://arxiv.org/abs/2501.17186v2), testing whether training on position + best move pairs from game data generalizes to puzzle positions. I note that solving puzzle positions and playing full games is the same core task of finding the best move in any given position.
+*KinGPT-Beaver acts as a (very approximate) proxy for Zhang et. al. 2025's ChessLLM from ["Complete Chess Games Enable LLM Become Chess Master"](https://arxiv.org/abs/2501.17186v2), testing whether training on position + best move pairs from game data generalizes to puzzle positions. I note that solving puzzle positions and playing full games is the same core task of finding the best move in any given position.
 
 ### Model Sanity (Legal Move %)
 
@@ -168,17 +168,17 @@ $\text{Sanity} = 1 - \frac{\text{number of invalid parses}}{\text{total number o
 | Model | Inference Type | Sanity |
 |:---|:---|---:|
 | Stockfish 18 | all | **n/a (100%)** |
-| KINGPT-Woodpecker | normal | 591/600 (98.5%) |
-| KINGPT-Beaver | normal | 170/600 (28.3%) |
-| KINGPT-Chimera | normal | **597/600 (99.5%)** |
-| Open LLaMa 3B | normal | 33/600 (5.5%) |
-| Open LLaMa 3B | cheating | 120/600 (20.0%) |
-| Open LLaMa 3B | pass@K=10 | 309/600 (51.5%) |
-| Open LLaMa 3B | modulo | **488/600 (81.3%)** |
-| Red Pajama 3B | normal | 116/600 (19.3%) |
-| Red Pajama 3B | cheating | 19/600 (3.1%) |
-| Red Pajama 3B | pass@K=10 | 305/600 (50.8%) |
-| Red Pajama 3B | modulo | **572/600 (95.3%)** |
+| KinGPT-Woodpecker | normal | 591/600 (98.5%) |
+| KinGPT-Beaver | normal | 170/600 (28.3%) |
+| KinGPT-Chimera | normal | **597/600 (99.5%)** |
+| OpenLLaMa 3B | normal | 33/600 (5.5%) |
+| OpenLLaMa 3B | cheating | 120/600 (20.0%) |
+| OpenLLaMa 3B | pass@K=10 | 309/600 (51.5%) |
+| OpenLLaMa 3B | modulo | **488/600 (81.3%)** |
+| RedPajama 3B | normal | 116/600 (19.3%) |
+| RedPajama 3B | cheating | 19/600 (3.1%) |
+| RedPajama 3B | pass@K=10 | 305/600 (50.8%) |
+| RedPajama 3B | modulo | **572/600 (95.3%)** |
 | ChessGPT-Base | normal | 502/600 (83.7%) |
 | ChessGPT-Base | cheating | 486/600 (81.0%) |
 | ChessGPT-Base | pass@K=10 | **597/600 (99.5%)** |
@@ -188,17 +188,17 @@ $\text{Sanity} = 1 - \frac{\text{number of invalid parses}}{\text{total number o
 | ChessGPT-Chat | pass@K=10 | 569/600 (94.8%) |
 | ChessGPT-Chat | modulo | **584/600 (97.3%)** |
 
-### KINGPT Theme-wide Comparison vs. C1-4B
+### KinGPT Theme-wide Comparison vs. C1-4B
 
-**As of 5/4/2026,** the full sample of puzzles and checkpoints for C1-4B have not been published on [Z. Tang's GitHub repo for C1-4B](https://github.com/CSSLab/C1). I record first-move accuracy for both models KINGPT-Chimera and C1-4B, but note that the sample size for number of puzzles tested per theme differs between KINGPT (n=100) and C1-4B (n=25).
+**As of 5/16/2026,** the full sample of puzzles and checkpoints for C1-4B have not been published on [Z. Tang's GitHub repo for C1-4B](https://github.com/CSSLab/C1). I record first-move accuracy for both models KinGPT-Chimera and C1-4B, but note that the sample size for number of puzzles tested per theme differs between KinGPT (n=100) and C1-4B (n=25).
 
 <ins>Key</ins>
 
-**KINGPT -** [KINGPT-Chimera](https://github.com/ethanjtang/KINGPT)
+**KinGPT -** [KINGPT-Chimera](https://github.com/ethanjtang/KinGPT)
 
 **C1 -** [C1-4B](https://github.com/CSSLab/C1)
 
-| Theme | KINGPT Accuracy (%) | C1 Accuracy (%) |
+| Theme | KinGPT Accuracy (%) | C1 Accuracy (%) |
 |:---|---:|---:|
 | advancedPawn | 61.0 | 64.0 |
 | attraction | 64.0 | 64.0 |
