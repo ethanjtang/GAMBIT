@@ -1,6 +1,6 @@
 # GAMBIT
 
-**arXiv link COMING SOON**
+[![arXiv](https://img.shields.io/badge/arXiv-2605.17565-b31b1b.svg?style=for-the-badge)](https://arxiv.org/abs/2605.17565) <br>
 
 > <ins>G</ins>ener<ins>a</ins>lization or <ins>M</ins>emorization? <ins>B</ins>r<ins>i</ins>ttleness <ins>T</ins>esting for Chess-Trained Language Models
 
@@ -226,4 +226,14 @@ $\text{Sanity} = 1 - \frac{\text{number of invalid parses}}{\text{total number o
 
 ## Citation
 
-**Citation COMING SOON**
+```bash
+@misc{tang2026generalizationmemorizationbrittlenesstesting,
+      title={Generalization or Memorization? Brittleness Testing for Chess-Trained Language Models}, 
+      author={Ethan Tang},
+      year={2026},
+      eprint={2605.17565},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2605.17565}, 
+}
+```
