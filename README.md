@@ -226,7 +226,7 @@ $\text{Sanity} = 1 - \frac{\text{number of invalid parses}}{\text{total number o
 
 ## Citation
 
-```bash
+```bibtex
 @misc{tang2026generalizationmemorizationbrittlenesstesting,
       title={Generalization or Memorization? Brittleness Testing for Chess-Trained Language Models}, 
       author={Ethan Tang},
